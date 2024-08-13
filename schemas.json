@@ -1,0 +1,80 @@
+{
+    "departments":{
+        "table_id":"departments",
+        "schema":[
+            {
+                "name": "id",
+                "mode": "NULLABLE",
+                "type": "INTEGER",
+                "description": " Id of the department",
+                "fields": []
+            },
+            {
+                "name": "department",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": " Name of the department",
+                "fields": []
+            }
+        ]
+    },
+    "jobs":{
+        "table_id":"jobs",
+        "schema":[
+            {
+                "name": "id",
+                "mode": "NULLABLE",
+                "type": "INTEGER",
+                "description": " Id of the job",
+                "fields": []
+            },
+            {
+                "name": "job",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": " Name of the job",
+                "fields": []
+            }
+        ]
+    },
+    "employees":{
+        "table_id":"employees",
+        "schema":[
+            {
+                "name": "id",
+                "mode": "NULLABLE",
+                "type": "INTEGER",
+                "description": "Id of the employee",
+                "fields": []
+            },
+            {
+                "name": "name",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": "Name and surname of the employee",
+                "fields": []
+            },
+            {
+                "name": "datetime",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": "Hire datetime in ISO format",
+                "fields": []
+            },
+            {
+                "name": "department_id",
+                "mode": "NULLABLE",
+                "type": "INTEGER",
+                "description": " Id of the department which the employee was hired for",
+                "fields": []
+            },
+            {
+                "name": "job_id",
+                "mode": "NULLABLE",
+                "type": "INTEGER",
+                "description": " Id of the job which the employee was hired for",
+                "fields": []
+            }
+        ]
+    }
+}
