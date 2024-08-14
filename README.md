@@ -1,21 +1,22 @@
 # GLOBANT_API
 
 This repository contains my resolution to the Globant's Data Engineering Coding Challenge.
-The API is available as a Cloud Run service here: [text](https://globant-api-g5kkg6lgsa-uc.a.run.app)
-Please, keep in mind that the route `/insert_records` is only available for 1 use, since it removes the files from the source bucket to prevent unnecesary reprocessings.
+
+The API is available as a Cloud Run service here: [GLOBANT-API](https://globant-api-g5kkg6lgsa-uc.a.run.app)  
+Please, keep in mind that the route `/insert_records` is only available for 1 use, since it removes the files from the source bucket to prevent accidental reprocessings.
 
 ## Local execution
 
-For the code to work, please set your ADC following the instructions in [text](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev).
+For the code to work, please set your ADC following the instructions in [Set up Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev).
 
-If you don't yet have gcloud CLI installed, you can do so from here [text](https://cloud.google.com/sdk/docs/install) prior to following the instructions above.
+If you don't yet have gcloud CLI installed, you can do so from here [Install the gcloud CLI](https://cloud.google.com/sdk/docs/install) prior to following the instructions above.
 
 Note that the following roles are needed and a service account is preferred:
-    - Storage Object Admin
-    - Service Usage Consumer
-    - BigQuery Job User
-    - BigQuery Data Editor
-    - Viewer
+- Storage Object Admin  
+- Service Usage Consumer  
+- BigQuery Job User  
+- BigQuery Data Editor  
+- Viewer  
 
 ## Endpoints
 
