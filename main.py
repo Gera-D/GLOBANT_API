@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 from functions import upload_file,hires_per_quarter_2021,hires_greater_than_mean_2021
 
 app = Flask(__name__)
@@ -36,4 +37,4 @@ def get_hires_greater_than_mean_2021():
         return str(err)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
