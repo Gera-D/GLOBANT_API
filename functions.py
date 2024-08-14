@@ -110,3 +110,28 @@ def hires_per_quarter_2021():
     records = [dict(row) for row in response]
     response_json = json.dumps(str(records))
     return response_json
+
+def hires_greater_than_mean_2021():
+    query = """DECLARE MEAN_HIRES FLOAT64;
+        SET MEAN_HIRES = (
+        SELECT (COUNT(id)/COUNT(DISTINCT department_id)) 
+        FROM `globant.employees` 
+        WHERE EXTRACT(YEAR FROM cast(datetime as timestamp))=2021
+        );
+
+        SELECT
+        d.id
+        ,d.department
+        ,COUNT(e.id) AS hired
+        FROM `globant.employees` e
+        INNER JOIN `globant.departments` d
+        ON e.department_id = d.id
+        WHERE EXTRACT(YEAR FROM cast(e.datetime as timestamp))=2021
+        GROUP BY d.id,d.department
+        HAVING hired > MEAN_HIRES
+        ORDER BY hired DESC;"""
+    query_job = bigquery_client.query(query=query)
+    response = query_job.result()
+    records = [dict(row) for row in response]
+    response_json = json.dumps(str(records))
+    return response_json
