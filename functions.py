@@ -47,11 +47,33 @@ def upload_dataframe(TEMP_FILE_PATH):
             columns = [column["name"] for column in schema]
             df = pd.read_csv(TEMP_FILE_PATH,header=None)
             df.columns = columns
-    
+
     if df.shape[0]<=1000:
         upload_to_bq(df,table_id,schema)
+        return
+    elif df.shape[0]%1000 == 0:
+        n_chunks = df.shape[0]/1000
     else:
-        print('More than 1000 rows.')
+        n_chunks = int(df.shape[0]/1000) + 1
+
+    dataframes_dict = slice_df(df,n_chunks)
+    
+    for i in dataframes_dict:
+        df = dataframes_dict[i]
+        upload_to_bq(df,table_id,schema)
+
+def slice_df(df, n_chunks):   
+    batch_size = 1000
+    row_start = 0
+    row_end = batch_size
+
+    dataframes = {}
+    for chunk in range(n_chunks):
+        dataframes[chunk] = df.iloc[row_start:row_end,:]
+        row_start += batch_size
+        row_end += batch_size
+
+    return dataframes
 
 def upload_to_bq(df,table_id,schema):
     dataset_id = 'globant'
@@ -66,5 +88,3 @@ def upload_to_bq(df,table_id,schema):
         ,destination=table
         ,job_config=job_config)
     load_job.result()
-
-upload_file()
